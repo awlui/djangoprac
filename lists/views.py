@@ -13,7 +13,9 @@ def view_list(request, list_id):
     try:
         list_ = List.objects.get(id=list_id)
     except ObjectDoesNotExist as ex:
-        return HttpResponse("Returned not 500")
+        return HttpResponse("List Doesn't Exists!")
+    except Exception as ex:
+        return HttpResponse("Don't know what went wrong")
 
     error = None
     if request.method == 'POST':
