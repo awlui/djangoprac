@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from lists.models import Item, List
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.http import HttpResponse
+
 # Create your views here.
 
 def home_page(request):
@@ -9,7 +10,11 @@ def home_page(request):
 
 
 def view_list(request, list_id):
-    list_ = List.objects.get(id=list_id)
+    try:
+        list_ = List.objects.get(id=list_id)
+    except ObjectDoesNotExist as ex:
+        return HttpResponse("Returned not 500")
+
     error = None
     if request.method == 'POST':
         try:
