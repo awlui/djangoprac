@@ -10,15 +10,13 @@
             <div class="text-center">
                 <h1>{% block header_text %}{% endblock %}</h1>
                 <form id="targ" method="POST" action="{% block form_action %}{% endblock %}">
-                    <p style="text-align: center;">
-                    <input class="form-control input-lg" name="item_text" type="text" id="id_new_item" placeholder="Enter a to-do item">
-                    </p>
+                    {{  form.text }}
                     {% csrf_token %}
-                {% if error %}
-                    <div class="form-group has-error">
-                        <span class="help-block">{{ error }}</span>
-                    </div>
-                {% endif %}
+                    {% if form.errors %}
+                        <div class="form-group has-error">
+                            <span class="help-block">{{ form.text.errors }}</span>
+                        </div>
+                    {% endif %}
                 </form>
             </div>
         </div>
@@ -29,6 +27,11 @@
             {% endblock %}
         </div>
     </div>
+          <script
+  src="http://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+    <script src="/static/list.js"></script>
   </body>
 
 </html>
